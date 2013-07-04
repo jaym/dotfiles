@@ -47,6 +47,16 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/core_perl
 export WORKON_HOME=~/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
+if [ -e /usr/bin/virtualenvwrapper.sh ]
+then 
+	source /usr/bin/virtualenvwrapper.sh
+fi
+
+if [ -e /usr/local/bin/virtualenvwrapper.sh ]
+then
+	source /usr/local/bin/virtualenvwrapper.sh
+fi
+
+workon default
 
 setopt NO_BEEP
