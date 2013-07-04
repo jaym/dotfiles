@@ -2,5 +2,5 @@
 
 for file in `ls -A | grep '^\.' | grep -v .git` 
 do 
-	ln -s $file ~/$file
+	ln -s `pwd`/$file ~/$file
 done
