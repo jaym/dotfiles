@@ -1,5 +1,4 @@
 set nocompatible "stop vim from behaving in a strongly vi-compatable way
-
 call pathogen#infect()
 let mapleader = ","
 
