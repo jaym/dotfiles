@@ -171,4 +171,7 @@ let g:jedi#auto_vim_configuration = 0
 
 "Python-mode
 let g:pymode_rope_vim_completion = 0
+set nofoldenable    " disable folding
 
+"Jinja
+autocmd BufNewFile,BufRead *.jinja set filetype=jinja
