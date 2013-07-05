@@ -57,5 +57,6 @@ then
 	source /usr/local/bin/virtualenvwrapper.sh
 fi
 
+workon default
 
 setopt NO_BEEP

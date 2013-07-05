@@ -1,4 +1,6 @@
 set nocompatible "stop vim from behaving in a strongly vi-compatable way
+"let g:pathogen_disabled = ['jedi-vim', 'neocomplete']
+
 call pathogen#infect()
 let mapleader = ","
 
@@ -161,4 +163,12 @@ endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+
+let g:jedi#popup_select_first = 0
+let g:neocomplete#enable_auto_select = 0
+let g:jedi#auto_vim_configuration = 0
+
+"Python-mode
+let g:pymode_rope_vim_completion = 0
 
