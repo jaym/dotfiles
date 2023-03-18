@@ -36,3 +36,6 @@ alias lt='exa --icons --tree --level=2' # tree
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
+
+export GOPATH="$HOME/workspace/godev"
+export PATH=$HOME/.cargo/bin:$GOPATH/bin:$HOME/.mix/escripts/:$HOME/.local/bin:$PATH
