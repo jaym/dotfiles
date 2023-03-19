@@ -17,7 +17,10 @@ return {
     },
     config = function()
       local lsp = require("lsp-zero")
-      lsp.preset("recommended")
+      lsp.preset({
+        name = "recommended",
+        set_lsp_keymaps = { preserve_mappings = false },
+      })
       lsp.ensure_installed({
         'gopls',
         'rust_analyzer',
@@ -32,14 +35,16 @@ return {
 
         set_buffer_keymap('n', 'gT', vim.lsp.buf.type_definition, 'Goto Type')
         set_buffer_keymap('n', 'gi', vim.lsp.buf.implementation, 'Goto Implmentation')
+        set_buffer_keymap('n', 'gd', vim.lsp.buf.definition, 'Goto Definition')
+        set_buffer_keymap('n', 'gD', vim.lsp.buf.declaration, 'Goto Declaration')
         set_buffer_keymap('n', 'K', vim.lsp.buf.hover, 'Hover')
         set_buffer_keymap('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature')
-        set_buffer_keymap('i', '<C-k>', vim.lsp.buf.signature_help, 'Signature')
-
         set_buffer_keymap('n', '<leader>lr', vim.lsp.buf.rename, 'Rename')
         set_buffer_keymap('n', '<leader>la', vim.lsp.buf.code_action, 'Code Actions')
         set_buffer_keymap('n', 'gr', vim.lsp.buf.references, 'References')
         set_buffer_keymap('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, 'Format')
+
+        set_buffer_keymap('i', '<C-k>', vim.lsp.buf.signature_help, 'Signature')
       end)
       local cmp = require("cmp")
       lsp.setup_nvim_cmp({
