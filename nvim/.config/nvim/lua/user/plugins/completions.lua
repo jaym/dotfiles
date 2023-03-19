@@ -72,6 +72,15 @@ return {
         }
       })
       lsp.nvim_workspace()
+
+      lsp.configure("gopls", {
+        settings = {
+          gopls = {
+            staticcheck = true,
+          },
+        },
+      })
+
       lsp.setup()
       vim.diagnostic.config { virtual_text = true }
     end
