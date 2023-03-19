@@ -27,21 +27,24 @@ return {
       })
       lsp.on_attach(function(client, bufnr)
         require("lsp-format").on_attach(client, bufnr)
+        local telescope = require("telescope.builtin")
 
         local function set_buffer_keymap(mode, lhs, rhs, desc)
           local bufopts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
           vim.keymap.set(mode, lhs, rhs, bufopts)
         end
 
-        set_buffer_keymap('n', 'gT', vim.lsp.buf.type_definition, 'Goto Type')
-        set_buffer_keymap('n', 'gi', vim.lsp.buf.implementation, 'Goto Implmentation')
-        set_buffer_keymap('n', 'gd', vim.lsp.buf.definition, 'Goto Definition')
+        set_buffer_keymap('n', 'gT', telescope.lsp_type_definitions, 'Goto Type')
+        set_buffer_keymap('n', 'gi', telescope.lsp_implementations, 'Goto Implmentation')
+        set_buffer_keymap('n', 'gd', telescope.lsp_definitions, 'Goto Definition')
         set_buffer_keymap('n', 'gD', vim.lsp.buf.declaration, 'Goto Declaration')
+        set_buffer_keymap('n', 'gr', telescope.lsp_references, 'References')
+
         set_buffer_keymap('n', 'K', vim.lsp.buf.hover, 'Hover')
         set_buffer_keymap('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature')
         set_buffer_keymap('n', '<leader>lr', vim.lsp.buf.rename, 'Rename')
         set_buffer_keymap('n', '<leader>la', vim.lsp.buf.code_action, 'Code Actions')
-        set_buffer_keymap('n', 'gr', vim.lsp.buf.references, 'References')
+        set_buffer_keymap('n', '<leader>ls', telescope.lsp_dynamic_workspace_symbols, 'Symbols')
         set_buffer_keymap('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, 'Format')
 
         set_buffer_keymap('i', '<C-k>', vim.lsp.buf.signature_help, 'Signature')
