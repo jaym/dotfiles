@@ -36,6 +36,9 @@ alias lt='exa --icons --tree --level=2' # tree
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
+# Appends the unwritten history after each command
+export PROMPT_COMMAND="$PROMPT_COMMAND;history -a"
+
 
 export GOPATH="$HOME/workspace/godev"
 export PATH=$HOME/.cargo/bin:$GOPATH/bin:$HOME/.mix/escripts/:$HOME/.local/bin:$PATH
