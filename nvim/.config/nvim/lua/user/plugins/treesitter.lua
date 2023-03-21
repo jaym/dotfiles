@@ -11,7 +11,7 @@ return {
     },
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "help", "query", "javascript", "typescript", "c", "go", "lua", "rust" },
+        ensure_installed = { "help", "query", "javascript", "typescript", "c", "go", "lua", "rust", "graphql" },
         highlight = { enable = true, },
         rainbow = {
           enable = true,
