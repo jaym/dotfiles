@@ -58,6 +58,13 @@ return {
         set_buffer_keymap('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, 'Format')
 
         set_buffer_keymap('i', '<C-k>', vim.lsp.buf.signature_help, 'Signature')
+
+        vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+          buffer = bufnr,
+          callback = function()
+            vim.lsp.codelens.refresh()
+          end
+        })
       end)
       local cmp = require("cmp")
       lsp.setup_nvim_cmp({
@@ -87,6 +94,9 @@ return {
         settings = {
           gopls = {
             staticcheck = true,
+            codelenses = {
+              test = true,
+            }
           },
         },
       })
