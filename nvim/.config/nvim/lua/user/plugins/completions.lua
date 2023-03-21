@@ -59,12 +59,18 @@ return {
 
         set_buffer_keymap('i', '<C-k>', vim.lsp.buf.signature_help, 'Signature')
 
-        vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-          buffer = bufnr,
-          callback = function()
-            vim.lsp.codelens.refresh()
-          end
-        })
+        local capabilities = client.server_capabilities
+        if capabilities.codeLensProvider then
+          vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave' }, {
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.codelens.refresh()
+            end
+          })
+
+          set_buffer_keymap('n', '<leader>ll', function() vim.lsp.codelens.refresh() end, 'Refresh CodeLens')
+          set_buffer_keymap('n', '<leader>lL', function() vim.lsp.codelens.run() end, 'Run CodeLens')
+        end
       end)
       local cmp = require("cmp")
       lsp.setup_nvim_cmp({
