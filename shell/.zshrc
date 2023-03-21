@@ -1,6 +1,7 @@
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
+setopt share_history
 unsetopt beep
 bindkey -e 
 bindkey "^[[1;5C" forward-word
