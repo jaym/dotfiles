@@ -9,6 +9,7 @@ return {
     ft = { "go", "gomod" },
     build = ":lua require('go.install').update_all_sync()",
   },
+
   {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = {
@@ -79,20 +80,23 @@ return {
         end
       end)
       local cmp = require("cmp")
+      local cmp_mappings = lsp.defaults.cmp_mappings({
+        ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+        ["<C-k>"] = cmp.mapping.select_prev_item {},
+        ["<C-p>"] = cmp.mapping.select_prev_item {},
+        ["<C-j>"] = cmp.mapping.select_next_item {},
+        ["<C-n>"] = cmp.mapping.select_next_item {},
+      })
+      cmp_mappings['<Tab>'] = nil
+      cmp_mappings['<S-Tab>'] = nil
       lsp.setup_nvim_cmp({
         -- preselect = cmp.PreselectMode.None,
         completion = {
           completeopt = 'menu,menuone,noinsert,noselect'
         },
         select_behavior = cmp.SelectBehavior.Insert,
-        mapping = lsp.defaults.cmp_mappings({
-          ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-          ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-          ["<C-k>"] = cmp.mapping.select_prev_item {},
-          ["<C-p>"] = cmp.mapping.select_prev_item {},
-          ["<C-j>"] = cmp.mapping.select_next_item {},
-          ["<C-n>"] = cmp.mapping.select_next_item {},
-        }),
+        mapping = cmp_mappings,
         sources = {
           { name = 'path' },
           { name = 'nvim_lsp', priority = 1000 },
