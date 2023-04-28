@@ -24,6 +24,7 @@ return {
       "L3MON4D3/LuaSnip",
       "rafamadriz/friendly-snippets",
       { "lukas-reineke/lsp-format.nvim", config = true },
+      "folke/trouble.nvim",
     },
     config = function()
       local lsp = require("lsp-zero")
@@ -44,11 +45,11 @@ return {
           vim.keymap.set(mode, lhs, rhs, bufopts)
         end
 
-        set_buffer_keymap('n', 'gT', telescope.lsp_type_definitions, 'Goto Type')
-        set_buffer_keymap('n', 'gi', telescope.lsp_implementations, 'Goto Implmentation')
-        set_buffer_keymap('n', 'gd', telescope.lsp_definitions, 'Goto Definition')
+        set_buffer_keymap('n', 'gT', "<cmd>TroubleToggle lsp_type_definitions<cr>", 'Goto Type')
+        set_buffer_keymap('n', 'gi', "<cmd>TroubleToggle lsp_implementations<cr>", 'Goto Implmentation')
+        set_buffer_keymap('n', 'gd', "<cmd>TroubleToggle lsp_definitions<cr>", 'Goto Definition')
+        set_buffer_keymap('n', 'gr', "<cmd>TroubleToggle lsp_references<cr>", 'References')
         set_buffer_keymap('n', 'gD', vim.lsp.buf.declaration, 'Goto Declaration')
-        set_buffer_keymap('n', 'gr', telescope.lsp_references, 'References')
 
         set_buffer_keymap('n', 'K', vim.lsp.buf.hover, 'Hover')
         set_buffer_keymap('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature')
@@ -56,8 +57,13 @@ return {
         set_buffer_keymap('n', '<leader>la', vim.lsp.buf.code_action, 'Code Actions')
         set_buffer_keymap('n', '<leader>ls', telescope.lsp_dynamic_workspace_symbols, 'Symbols')
         set_buffer_keymap('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, 'Format')
-
         set_buffer_keymap('i', '<C-k>', vim.lsp.buf.signature_help, 'Signature')
+
+        set_buffer_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", "TroubleToggle")
+        set_buffer_keymap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics")
+        set_buffer_keymap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics")
+        set_buffer_keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", "LocList")
+        set_buffer_keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", "Quickfix")
 
         local capabilities = client.server_capabilities
         if capabilities.codeLensProvider then
@@ -120,8 +126,35 @@ return {
         sources = {
           nls.builtins.formatting.stylua,
           nls.builtins.diagnostics.ruff.with { extra_args = { "--max-line-length=180" } },
+          nls.builtins.diagnostics.cppcheck,
+          nls.builtins.diagnostics.cpplint,
         },
       }
     end,
   },
+  {
+    "folke/trouble.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons"
+    },
+    config = function()
+      vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
+        { silent = true, noremap = true }
+      )
+      vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+        { silent = true, noremap = true }
+      )
+      vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
+        { silent = true, noremap = true }
+      )
+      vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
+        { silent = true, noremap = true }
+      )
+      vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+        { silent = true, noremap = true }
+      )
+
+      require("trouble").setup()
+    end
+  }
 }
