@@ -9,13 +9,32 @@ return {
     ft = { "go", "gomod" },
     build = ":lua require('go.install').update_all_sync()",
   },
-
+  {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+    config = function()
+      require("mason-null-ls").setup({
+        ensure_installed = {
+          "cppcheck",
+          "cpplint",
+          "ruff",
+          "staticcheck",
+          "stylua",
+        }
+      })
+    end,
+  },
   {
     "VonHeikemen/lsp-zero.nvim",
     dependencies = {
       "neovim/nvim-lspconfig",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "jay-babu/mason-null-ls.nvim",
       "hrsh7th/nvim-cmp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
@@ -132,6 +151,8 @@ return {
           nls.builtins.diagnostics.ruff.with { extra_args = { "--max-line-length=180" } },
           nls.builtins.diagnostics.cppcheck,
           nls.builtins.diagnostics.cpplint,
+          nls.builtins.diagnostics.shellcheck,
+          nls.builtins.diagnostics.staticcheck,
         },
       }
     end,
