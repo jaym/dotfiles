@@ -52,7 +52,19 @@ keymap("i", "<C-e>", "<ESC>A", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
+-- Terminal mode --
+-- ctrl h j l k to navigate
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", opts)
 
-vim.keymap.set('n', '<leader>dl', "<cmd>Telescope diagnostics<cr>", { noremap = true, silent = true, desc = "Diagnostics List" })
+-- escapes terminal mode
+keymap("t", "<Esc>", "<C-\\><C-N>", opts)
+
+
+
+vim.keymap.set('n', '<leader>dl', "<cmd>Telescope diagnostics<cr>",
+  { noremap = true, silent = true, desc = "Diagnostics List" })
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_prev, { noremap = true, silent = true, desc = "Diagnostics Next" })
 vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_next, { noremap = true, silent = true, desc = "Diagnostics Prev" })
