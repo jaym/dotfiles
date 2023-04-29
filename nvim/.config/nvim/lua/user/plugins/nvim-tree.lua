@@ -1,5 +1,13 @@
 return {
   {
+    "folke/which-key.nvim",
+    opts = {
+      defaults = {
+        ["<leader>n"] = { name = "+tree" },
+      },
+    },
+  },
+  {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
       "nvim-lua/plenary.nvim",

@@ -1,5 +1,14 @@
 return {
   {
+    "folke/which-key.nvim",
+    opts = {
+      defaults = {
+        ["<leader>l"] = { name = "+lsp" },
+        ["<leader>x"] = { name = "+diagnostics" },
+      },
+    },
+  },
+  {
     "ray-x/go.nvim",
     dependencies = { "ray-x/guihua.lua" },
     config = function()

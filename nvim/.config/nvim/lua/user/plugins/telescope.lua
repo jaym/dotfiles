@@ -7,7 +7,8 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim"
+      "nvim-lua/plenary.nvim",
+      "ahmedkhalf/project.nvim",
     },
     keys = {
       { "<leader>b",  "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Buffers" },
