@@ -14,6 +14,7 @@ compinit
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(atuin init zsh)"
 
 export GOPATH="$HOME/workspace/godev"
 export PATH=$HOME/.cargo/bin:$GOPATH/bin:$HOME/.mix/escripts/:$HOME/.local/bin:$PATH
