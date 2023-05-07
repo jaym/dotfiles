@@ -29,7 +29,6 @@ return {
       require("mason-null-ls").setup({
         ensure_installed = {
           "cppcheck",
-          "cpplint",
           "ruff",
           "staticcheck",
           "stylua",
@@ -159,7 +158,6 @@ return {
           nls.builtins.formatting.stylua,
           nls.builtins.diagnostics.ruff.with { extra_args = { "--max-line-length=180" } },
           nls.builtins.diagnostics.cppcheck,
-          nls.builtins.diagnostics.cpplint,
           nls.builtins.diagnostics.shellcheck,
           nls.builtins.diagnostics.staticcheck,
         },
