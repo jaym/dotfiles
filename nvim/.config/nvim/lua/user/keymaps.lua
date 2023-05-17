@@ -68,3 +68,5 @@ vim.keymap.set('n', '<leader>dl', "<cmd>Telescope diagnostics<cr>",
   { noremap = true, silent = true, desc = "Diagnostics List" })
 vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_prev, { noremap = true, silent = true, desc = "Diagnostics Next" })
 vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_next, { noremap = true, silent = true, desc = "Diagnostics Prev" })
+vim.keymap.set('n', '<leader>h', "<cmd>Telescope help_tags<cr>",
+  { noremap = true, silent = true, desc = "Diagnostics Prev" })
