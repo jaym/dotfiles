@@ -30,5 +30,6 @@
 (require 'init-completion)
 (require 'init-buffer)
 (require 'init-editing)
+(require 'init-proced)
 
 (load custom-file :noerror)

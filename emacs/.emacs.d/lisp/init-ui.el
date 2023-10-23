@@ -50,7 +50,8 @@
 
 (set-face-attribute 'default nil
                     :font "Hack"
-                    :height 140)
+                    :height 140
+                    :weight 'light)
 ;; ;; Makes commented text and keywords italics.
 ;; ;; This is working in emacsclient but not emacs.
 ;; ;; Your font must have an italic face available.
