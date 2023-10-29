@@ -40,5 +40,15 @@
   :config
   (evil-collection-init))
 
+(use-package fill-column-indicator)
+(use-package evil-set-option
+  :after evil fill-column-indicator
+  :ensure t
+  :elpaca (evil-set-option
+           :host github
+           :repo "jaym/evil-set-option"
+           :branch "main")
+  :config
+  (evil-set-option-mode))
 
 (provide 'init-evil)
