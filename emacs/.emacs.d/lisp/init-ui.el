@@ -29,7 +29,7 @@
   (modus-themes-italic-constructs t))
 
 (defun me/init-theme ()
-  (load-theme 'modus-operandi t))
+  (load-theme 'modus-operandi-tinted t))
 
 (add-hook 'emacs-startup-hook #'me/init-theme)
 
