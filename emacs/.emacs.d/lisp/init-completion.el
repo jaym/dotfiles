@@ -5,6 +5,13 @@
         :config
         (setq consult-narrow-key "<"))
 
+(use-package consult-notes
+  :elpaca (:type git :host github :repo "mclear-tools/consult-notes")
+  :commands (consult-notes
+             consult-notes-search-in-all-notes)
+  :config
+  (consult-notes-denote-mode))
+
 (use-package corfu
              :hook
              (eval-expression-minibuffer-setup . corfu-mode)
