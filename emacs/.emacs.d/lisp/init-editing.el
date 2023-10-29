@@ -1,9 +1,5 @@
-(use-package parinfer-rust-mode
-  :hook emacs-lisp-mode
-  :custom
-  (parinfer-rust-auto-download t)
-  (parinfer-rust-library-directory (expand-file-name "parinfer/lib/" no-littering-var-directory))
-  :init
-  (setq parinfer-rust-auto-download t))
+(setq-default fill-column 80)
+
+(add-hook 'text-mode-hook 'visual-line-mode)
 
 (provide 'init-editing)
