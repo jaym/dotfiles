@@ -12,21 +12,43 @@
                (recentf-expand-file-name no-littering-etc-directory))
   )
 
+(defun my/consult-switch-to-buffer ()
+         "`consult-buffer' with buffers provided by persp."
+         (interactive)
+         (with-persp-buffer-list () (consult-buffer)))
+
 (my/leader-def
   "b" '(:ignore t :wk "buffer")
-  "b b" '(consult-buffer :wk "Switch buffer")
+  "b b" '(my/consult-switch-to-buffer :wk "Switch buffer")
   "b i" '(ibuffer :wk "Ibuffer")
-  "b k" '(kill-this-buffer :wk "Kill this buffer")
+  "b k" '(kill-buffer :wk "Kill this buffer")
   "b n" '(next-buffer :wk "Next buffer")
   "b p" '(previous-buffer :wk "Previous buffer")
   "b r" '(revert-buffer :wk "Reload buffer"))
 
+(defun my/eshell-other-frame ()
+  (interactive)
+  (let ((new-frame (make-frame)))
+    (select-frame new-frame)
+    (delete-other-windows)
+    (eshell)))
+
+(my/leader-def
+  "F" '(:ignore  t :wk "frame")
+  "F n" '(make-frame :wk "New")
+  "F d" '(dired-other-frame :wk "Dired" )
+  "F s" '(my/eshell-other-frame))
+
 (my/leader-def
   "f" '(:ignore t :wk "file")
-  "f c" '((lambda () (interactive) (find-file "~/.emacs.d/")) :wk "Edit emacs config")
+  "f c" '((lambda () (interactive) (consult-find "~/.emacs.d/")) :wk "Edit emacs config")
   "f f" '(find-file :wk "Find file")
   "f r" '(consult-recent-file :wk "Recent file")
   "f s" '(save-buffer :wk "Save file"))
+
+(my/leader-def
+  "p" '(:ignore t :wk "project")
+  "p b" '(consult-project-buffer :wk "Switch buffer"))
 
 (my/leader-def
   "m" '(:ignore t :wk "mode")

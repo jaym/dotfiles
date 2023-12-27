@@ -1,3 +1,4 @@
+(setq package-enable-at-startup nil)
 (setq user-emacs-cache-directory (expand-file-name "~/.cache/emacs/"))
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 

@@ -60,6 +60,24 @@
 (set-face-attribute 'font-lock-keyword-face nil
                     :slant 'italic)
 
+(defun jdm/set-font-faces ()
+  (message "Setting faces!")
+  (set-face-attribute 'default nil :font "Fira Code Retina" :height 130)
+
+  ;; Set the fixed pitch face
+  (set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height 130)
+
+  ;; Set the variable pitch face
+  (set-face-attribute 'variable-pitch nil :font "Cantarell" :height 140 :weight 'regular))
+
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (jdm/set-font-faces))))
+    (jdm/set-font-faces))
+
+
 ;; Use hydras for zooming
 (defhydra hydra-zoom ()
   "zoom"
@@ -78,11 +96,6 @@
   ;; Grow and shrink the Vertico minibuffer
   (setq vertico-resize t))
 
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
 
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
@@ -126,6 +139,13 @@
   (aw-dispatch-always t)
   (aw-keys '(?a ?d ?f ?g ?h ?q ?w ?p ?y)))
 
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-project-detection 'auto)
+  (setq doom-modeline-icon t))
+
 (setq scroll-margin 7
       scroll-conservatively 7
       scroll-preserve-screen-position t)
@@ -134,6 +154,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
+(setq display-line-numbers-width-start t)
 (global-display-line-numbers-mode 1)
 
 (fset 'yes-or-no-p 'y-or-n-p)

@@ -1,8 +1,13 @@
 (use-package org
-             :elpaca nil
-             :custom
-             (require 'org-protocol)
-             (org-startup-indented t))
+  :elpaca nil
+  :custom
+  (org-startup-indented t)
+  :config
+  (require 'org-protocol)
+  (setq org-babel-lisp-eval-fn #'sly-eval)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((lisp . t))))
 
 (use-package evil-org
              :after org
@@ -39,6 +44,15 @@
              :config
              (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp")))
 
+(use-package org-download
+  :after org
+  :hook ((dired-mode . org-download-enable))
+  :commands (org-download-enable
+             org-download-yank
+             org-download-screenshot)
+  :config
+  (setq-default org-download-image-dir "./img"))
+
 (use-package org-protocol-capture-html
   :elpaca (:host github :repo "alphapapa/org-protocol-capture-html"))
 
@@ -52,12 +66,12 @@
   (defun transform-square-brackets-to-round-ones(string-to-transform)
     "Transforms [ into ( and ] into ), other chars left unchanged."
     (concat 
-     (mapcar #'(lambda (c) (if (equal c ?[) ?\( (if (equal c ?]) ?\) c))) string-to-transform))
+     (mapcar #'(lambda (c) (if (equal c ?\[) ?\( (if (equal c ?\]) ?\) c))) string-to-transform))
     )
   
   (require 'org-protocol-capture-html)
   (setq org-capture-templates 
-    '(("w" "Work Task" entry (file "~/sync/work.org") "* TODO %?" :empty-lines 1)
+    '(
       ("p" "Protocol")
       ("pw" "Protocol" entry (file+headline "~/sync/inbox.org" "Inbox")
         "* %a\n:PROPERTIES:\n:CREATED: %U\n:Source: %:link\n:END:\n\n%?\n%:initial" :empty-lines 1)
@@ -88,11 +102,12 @@
 (use-package denote
   :after
   consult
+  :demand t
   :general
   (my/leader-def
     "n" '(:ignore t :wk "notes")
     "n n" '(denote-create-note :wk "New note") 
-    "n o" '(denote-open-or-create :wk "Open note")
+    "n o" '(consult-notes :wk "Open note")
     "n l" '(denote-add-links :wk "Add links")
     "n L" '(denote-add-missing-links :wk "Add missing links")
     "n b" '(denote-show-backlinks-buffer :wk "Show backlinks"))

@@ -5,7 +5,13 @@
                                      :states '(normal insert visual emacs)
                                      :keymaps 'override
                                      :prefix "SPC"
-                                     :global-prefix "M-SPC"))
+                                     :global-prefix "M-SPC")
+	     (general-create-definer my/comma-leader-def
+	       :states '(normal visual)
+	       :keymaps 'override
+	       :prefix ","
+	      )
+	     )
 
 (use-package hydra)
 
@@ -16,6 +22,7 @@
 
 (my/leader-def "u" 'universal-argument)
 (global-set-key (kbd "C-M-u") 'universal-argument)
+(general-def 'normal "U" 'undo-tree-visualize)
 
 (use-package which-key
   :init

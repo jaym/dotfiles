@@ -67,6 +67,7 @@ input "1133:50503:Logitech_USB_Receiver" {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec esh
 
     # Kill focused window
     bindsym $mod+Shift+c kill
