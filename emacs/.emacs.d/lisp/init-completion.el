@@ -1,25 +1,10 @@
-(use-package consult
-        :demand t
-        :hook (completion-list-mode . consult-preview-at-point)
-        :config
-        (setq consult-narrow-key "<"))
-
-(use-package consult-notes
-  :elpaca (:type git :host github :repo "mclear-tools/consult-notes")
-  :commands (consult-notes
-             consult-notes-search-in-all-notes)
-  :config
-  (setq consult-notes-org-headings-files '("~/sync/inbox.org"))
-  (consult-notes-org-headings-mode)
-  (consult-notes-denote-mode))
-
 (use-package company
   :bind (("M-/" . #'company-complete-common-or-cycle)
-	 ("<tab>" . #'company-complete-common-or-cycle))
+	 ("C-i" . #'company-complete-common-or-cycle))
   ((:map company-active-map
 	 ("C-w" . nil)
 	 ("M-." . #'company-show-location)
-	 ("<tab>" . #'company-complete)))
+	 ("<tab>" . nil)))
   :custom
   (company-tooltip-align-annotations t "aligns annotation to the right")
   (company-tooltip-limit 12 "bigger popup window")

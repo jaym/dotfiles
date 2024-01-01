@@ -56,6 +56,7 @@
 (use-package evil-collection
   :after evil
   :config
+  ;; (setq evil-collection-setup-minibuffer t)
   (setq evil-collection-mode-list (remove 'lispy evil-collection-mode-list))
   (evil-collection-init))
 

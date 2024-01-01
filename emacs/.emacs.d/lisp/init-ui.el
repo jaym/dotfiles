@@ -1,37 +1,42 @@
-(use-package modus-themes
-  :defer t
-  :custom
-  (modus-themes-completions
-   '((matches . (extrabold background intense))
-     (selection . (semibold accented intense))
-     (popup . (accented))
-     (t . (extrabold intense))))
-  (modus-themes-org-blocks 'tinted-background)
-  (modus-themes-mixed-fonts t)
-  (modus-themes-headings
-   '((0 . (1.4))
-     (1 . (1.4))
-     (2 . (1.1))
-     (t . (1.05))))
-  (modus-themes-common-palette-overrides
-   '((cursor pink)
-     (fg-heading-0 magenta-warmer)
-     (bg-heading-0 bg-magenta-nuanced)
+;; (use-package modus-themes
+;;   :defer t
+;;   :custom
+;;   (modus-themes-completions
+;;    '((matches . (extrabold background intense))
+;;      (selection . (semibold accented intense))
+;;      (popup . (accented))
+;;      (t . (extrabold intense))))
+;;   (modus-themes-org-blocks 'tinted-background)
+;;   (modus-themes-mixed-fonts t)
+;;   (modus-themes-headings
+;;    '((0 . (1.4))
+;;      (1 . (1.4))
+;;      (2 . (1.1))
+;;      (t . (1.05))))
+;;   (modus-themes-common-palette-overrides
+;;    '((cursor pink)
+;;      (fg-heading-0 magenta-warmer)
+;;      (bg-heading-0 bg-magenta-nuanced)
 
-     (fg-heading-1 magenta-warmer)
+;;      (fg-heading-1 magenta-warmer)
 
-     (fg-heading-2 blue-warmer)
+;;      (fg-heading-2 blue-warmer)
 
-     (fg-heading-3 cyan-warmer)))
+;;      (fg-heading-3 cyan-warmer)))
   
   
-  (modus-themes-bold-constructs t)
-  (modus-themes-italic-constructs t))
+;;   (modus-themes-bold-constructs t)
+;;   (modus-themes-italic-constructs t))
 
-(defun me/init-theme ()
-  (load-theme 'modus-operandi-tinted t))
+;; (defun me/init-theme ()
+;;   (load-theme 'modus-operandi-tinted t))
 
-(add-hook 'emacs-startup-hook #'me/init-theme)
+;; (add-hook 'emacs-startup-hook #'me/init-theme)
+
+(use-package solarized-theme
+  :ensure t
+  :config
+  (load-theme 'solarized-selenized-light t))
 
 (use-package persistent-soft
   :demand t)
@@ -90,6 +95,13 @@
 
 ;; Enable vertico
 (use-package vertico
+  :bind
+  ((:map vertico-map
+	 ("C-u" . 'evil-delete-back-to-indentation)
+	 ("C-n" . 'vertico-next)
+	 ("C-p" . 'vertico-previous)
+	 ("C-k" . 'vertico-previous)
+	 ("C-j" . 'vertico-next)))
   :init
   (vertico-mode)
   (vertico-mouse-mode)
@@ -119,30 +131,11 @@
   (add-hook 'marginalia-mode-hook #'all-the-icons-completion-mode)
   (all-the-icons-completion-mode))
 
-(use-package ace-window
-  :bind (("M-o" . ace-window))
-  :custom
-  (aw-dispatch-alist
-   '((?x aw-delete-window "Delete Window")
-     (?m aw-swap-window "Swap Windows")
-     (?M aw-move-window "Move Window")
-     (?c aw-copy-window "Copy Window")
-     (?j aw-switch-buffer-in-window "Select Buffer")
-     (?n aw-flip-window)
-     (?u aw-switch-buffer-other-window "Switch Buffer Other Window")
-     (?c aw-split-window-fair "Split Fair Window")
-     (?v aw-split-window-vert "Split Vert Window")
-     (?s aw-split-window-horz "Split Horz Window")
-     (?o delete-other-windows "Delete Other Windows")
-     (?? aw-show-dispatch-help))
-   aw-dispatch-always t)
-  (aw-dispatch-always t)
-  (aw-keys '(?a ?d ?f ?g ?h ?q ?w ?p ?y)))
-
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
   :config
+  (setq doom-modeline-buffer-enable nil)
   (setq doom-modeline-project-detection 'auto)
   (setq doom-modeline-icon t))
 

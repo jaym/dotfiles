@@ -12,16 +12,13 @@
                (recentf-expand-file-name no-littering-etc-directory))
   )
 
-(defun my/consult-switch-to-buffer ()
-         "`consult-buffer' with buffers provided by persp."
-         (interactive)
-         (with-persp-buffer-list () (consult-buffer)))
+(defun my/persp-kill-this-buffer ()
+  (interactive)
+  (persp-kill-buffer* (current-buffer)))
 
 (my/leader-def
   "b" '(:ignore t :wk "buffer")
-  "b b" '(my/consult-switch-to-buffer :wk "Switch buffer")
-  "b i" '(ibuffer :wk "Ibuffer")
-  "b k" '(kill-buffer :wk "Kill this buffer")
+  "b k" '(my/persp-kill-this-buffer :wk "Kill buffer")
   "b n" '(next-buffer :wk "Next buffer")
   "b p" '(previous-buffer :wk "Previous buffer")
   "b r" '(revert-buffer :wk "Reload buffer"))

@@ -21,6 +21,7 @@
   (message "Reloading init.el... done."))
 
 (require 'init-elpaca)
+(require 'init-util)
 (require 'init-no-littering)
 (require 'init-workspace)
 (require 'init-evil)
@@ -43,5 +44,7 @@
 (require 'init-magit)
 (require 'init-lisp)
 (require 'init-golang)
+(require 'init-nix)
+(require 'init-rust)
 
 (load custom-file :noerror)
